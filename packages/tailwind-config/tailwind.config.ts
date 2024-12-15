@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config: Omit<Config, "content"> = {
   darkMode: ["class"],
@@ -58,9 +58,24 @@ const config: Omit<Config, "content"> = {
         "times-new-roman": ["Times New Roman", "serif"],
         verdana: ["Verdana", "sans-serif"],
       },
+      keyframes: {
+        "fade-in": {
+          from: {
+            opacity: "0",
+            transform: "translateY(-10px)",
+          },
+          to: {
+            opacity: "1",
+            transform: "none",
+          },
+        },
+      },
+      animate: {
+        "fade-in": "fade-in 1000ms var(--animation-delay, 0ms) ease forwards",
+      },
     },
   },
   plugins: [import("tailwindcss-animate")],
-}
+};
 
-export default config
+export default config;

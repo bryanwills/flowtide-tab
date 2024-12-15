@@ -27,11 +27,7 @@ import {
 import { Button } from "@flowtide/ui";
 import { useTheme } from "@flowtide/ui";
 import { cn } from "@/lib/utils";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@flowtide/ui";
+import { Popover, PopoverContent, PopoverTrigger } from "@flowtide/ui";
 import { Checkbox } from "@flowtide/ui";
 import { Input } from "@flowtide/ui";
 import {
@@ -586,7 +582,9 @@ function App() {
     setRendered(true);
     let cachedImageUrl;
     try {
-      cachedImageUrl = JSON.parse(localStorage.getItem("backgroundImage") || "null");
+      cachedImageUrl = JSON.parse(
+        localStorage.getItem("backgroundImage") || "null",
+      );
     } catch (error) {
       cachedImageUrl = null;
     }
@@ -615,7 +613,10 @@ function App() {
   }, [rendered]);
 
   useEffect(() => {
-    if (widgetPreferences?.bookmarks === "true" && chrome.bookmarks !== undefined) {
+    if (
+      widgetPreferences?.bookmarks === "true" &&
+      chrome.bookmarks !== undefined
+    ) {
       chrome.bookmarks.getTree((bookmarkTreeNodes) => {
         const flattenBookmarks = (nodes: any[]): Bookmark[] => {
           let bookmarks: Bookmark[] = [];
@@ -635,7 +636,11 @@ function App() {
     }
   }, [widgetPreferences?.bookmarks]);
 
-  const options: object = { hour: "2-digit", minute: "2-digit", hour12: clockFormat };
+  const options: object = {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: clockFormat,
+  };
 
   const firstUncompletedTask = tasks.find((task) => !task.completed);
 
@@ -1301,7 +1306,10 @@ function App() {
                   )}
                   onClick={() => {
                     setChangeTime(1000 * 60 * 60 * 24);
-                    localStorage.setItem("changeTime", String(1000 * 60 * 60 * 24));
+                    localStorage.setItem(
+                      "changeTime",
+                      String(1000 * 60 * 60 * 24),
+                    );
                   }}
                 >
                   <span>{chrome.i18n.getMessage("every_day")}</span>
@@ -1473,11 +1481,13 @@ function App() {
                         <span
                           className="text-sm font-medium leading-none select-none focus-within:select-all outline-none"
                           onDoubleClick={(e) => {
-                            (e.target as HTMLSpanElement).contentEditable = "true";
+                            (e.target as HTMLSpanElement).contentEditable =
+                              "true";
                             (e.target as HTMLSpanElement).focus();
                           }}
                           onBlur={(e) => {
-                            (e.target as HTMLSpanElement).contentEditable = "false";
+                            (e.target as HTMLSpanElement).contentEditable =
+                              "false";
                             setTasks((tasks) =>
                               tasks.map((t) =>
                                 t.id === task.id
@@ -1530,11 +1540,11 @@ function App() {
                     if (taskInput?.trim() !== "") {
                       setTasks((tasks: Task[]) => [
                         ...tasks,
-                        ({
+                        {
                           id: Date.now(),
                           text: taskInput,
                           completed: false,
-                        } as Task),
+                        } as Task,
                       ]);
                       setTaskInput("");
                     }
